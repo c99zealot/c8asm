@@ -33,5 +33,5 @@ void print_msg(MsgType msgtype, int line, int col, char *fmt, ...) {
         putchar('\n');
         while (--col > 0)
                 putchar(' ');
-        fputs(BOLD(YELLOW("^")) "\n\n", stderr);
+        fputs(BOLD(YELLOW("^")) "\n\n", stdout);
 }
