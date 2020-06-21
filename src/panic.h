@@ -9,8 +9,7 @@
         #include "lexer.h"
         #include "exitcodes.h"
 
-        extern FILE *infile, *outfile;
-        extern char *outfile_name;
+        extern FILE *infile;
         extern uintptr_t label_defs_len, label_refs_len;
 
         //
@@ -37,8 +36,6 @@
                         free(outfile_buffer);
                 if (infile)
                         fclose(infile);
-                if (outfile)
-                        fclose(outfile);
 
                 exit(err);
         }
