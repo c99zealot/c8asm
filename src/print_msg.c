@@ -5,7 +5,7 @@
 #include "ansicodes.h"
 
 //
-// print_msg - prints formatted error/waning messages
+// print_msg - prints formatted error/warning messages
 //
 void print_msg(MsgType msgtype, int line, int col, char *fmt, ...) {
         char errmsg[128];
@@ -33,5 +33,5 @@ void print_msg(MsgType msgtype, int line, int col, char *fmt, ...) {
         putchar('\n');
         while (--col > 0)
                 putchar(' ');
-        fputs(BOLD(YELLOW("^")) "\n\n", stdout);
+        fputs(BOLD(YELLOW("^")) "\n\n", stderr);
 }
