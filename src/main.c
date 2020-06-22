@@ -28,7 +28,7 @@ Instruction *outfile_buffer, *outfile_buffer_ptr;
 LabelRef *label_refs, *label_refs_ptr;
 LabelDef *label_defs, *label_defs_ptr;
 
-uintptr_t label_defs_len, label_refs_len;
+ptrdiff_t label_defs_len, label_refs_len;
 
 int error_count, warning_count;
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
 
         infile_name = argv[1];
 
-        if (!(infile = fopen(argv[1], "r"))) {
+        if (!(infile = fopen(argv[1], "rb"))) {
                 fprintf(stderr, FMT_ERRMSG("failed to open file `%s`\n"), infile_name);
                 return ERR_FOPEN_FAIL;
         }
@@ -94,7 +94,7 @@ int main(int argc, char **argv) {
         }
         (tkn_stream_ptr++)->type = STREAM_END; // finish lexing
 
-        uintptr_t tkns_generated = tkn_stream_ptr - tkn_stream;
+        ptrdiff_t tkns_generated = tkn_stream_ptr - tkn_stream;
         if (!(tkn_stream = realloc(tkn_stream, sizeof(Token) * tkns_generated))) {
                 fputs(FMT_ERRMSG("failed to resize the token stream\n"), stderr);
                 panic(ERR_MALLOC_FAIL);
@@ -118,8 +118,8 @@ int main(int argc, char **argv) {
 
         // check that label definitions are unique
         label_defs_len = label_defs_ptr - label_defs;
-        for (unsigned i = 0; i < label_defs_len; ++i)
-                for (unsigned j = i + 1; j < label_defs_len; ++j)
+        for (int i = 0; i < label_defs_len; ++i)
+                for (int j = i + 1; j < label_defs_len; ++j)
                         if (!strcmp(label_defs[i].label_text, label_defs[j].label_text)) {
                                 print_msg(ERROR, label_defs[j].line, label_defs[j].col,
                                         "multiple definition of label `%s`", label_defs[j].label_text);
@@ -131,9 +131,9 @@ int main(int argc, char **argv) {
         _Bool found_ref;
 
         label_refs_len = label_refs_ptr - label_refs;
-        for (unsigned i = 0; i < label_refs_len; ++i) {
+        for (int i = 0; i < label_refs_len; ++i) {
                 found_ref = 0;
-                for (unsigned j = 0; j < label_defs_len; ++j) {
+                for (int j = 0; j < label_defs_len; ++j)
                         if (!strcmp(label_refs[i].label_text, label_defs[j].label_text)) {
                                 found_ref = 1;
 
@@ -142,7 +142,6 @@ int main(int argc, char **argv) {
                                 instr_ptr[0] |= ((label_defs[j].c8_addr & 0xF00) >> 8);
                                 instr_ptr[1] = label_defs[j].c8_addr & 0x0FF;
                         }
-                }
 
                 if (!found_ref) {
                         print_msg(ERROR, label_refs[i].line, label_refs[i].col, "undefined reference to label `%s`",
@@ -168,10 +167,10 @@ int main(int argc, char **argv) {
         fwrite(outfile_buffer, sizeof(Instruction), outfile_buffer_ptr - outfile_buffer, outfile);
 
         // cleanup and exit
-        for (unsigned i = 0; i < label_defs_len; ++i)
+        for (int i = 0; i < label_defs_len; ++i)
                 free(label_defs[i].label_text);
 
-        for (unsigned i = 0; i < label_refs_len; ++i)
+        for (int i = 0; i < label_refs_len; ++i)
                 free(label_refs[i].label_text);
 
         free(tkn_stream);

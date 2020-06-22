@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <stddef.h>
 
 #include "exitcodes.h"
 #include "ansicodes.h"
@@ -25,14 +27,15 @@ extern inline Token next_tkn(void);
 // push_label_ref - pushes a LabelRef to the label reference table, grows table if needed
 //
 static inline void push_label_ref(Token *label) {
-        static uintptr_t label_refs_pushed;
-        label_refs_pushed = label_refs_ptr - label_refs;
+        ptrdiff_t label_refs_pushed = label_refs_ptr - label_refs;
 
-        if (label_refs_pushed > LABEL_BUFFER_INIT_LEN)
+        if (label_refs_pushed >= LABEL_BUFFER_INIT_LEN) {
                 if (!(label_refs = realloc(label_refs, label_refs_pushed * sizeof(LabelRef) + sizeof(LabelRef)))) {
                         fputs(FMT_ERRMSG("failed to resize buffer for label reference table\n"), stderr);
                         panic(ERR_MALLOC_FAIL);
                 }
+                label_refs_ptr = label_refs + label_refs_pushed;
+        }
 
         *label_refs_ptr++ = (LabelRef){
                 .label_text = label->value.text,
@@ -46,14 +49,15 @@ static inline void push_label_ref(Token *label) {
 // push_label_def - pushes a LabelDef to the label definition table, grows table if needed
 //
 static inline void push_label_def(Token *label) {
-        static uintptr_t label_defs_pushed;
-        label_defs_pushed = label_defs_ptr - label_defs;
+        ptrdiff_t label_defs_pushed = label_defs_ptr - label_defs;
 
-        if (label_defs_pushed > LABEL_BUFFER_INIT_LEN)
-                if (!(label_defs = realloc(label_defs, label_defs_pushed * sizeof(LabelRef) + sizeof(LabelRef)))) {
+        if (label_defs_pushed >= LABEL_BUFFER_INIT_LEN) {
+                if (!(label_defs = realloc(label_defs, label_defs_pushed * sizeof(LabelDef) + sizeof(LabelDef)))) {
                         fputs(FMT_ERRMSG("failed to resize buffer for label definition table\n"), stderr);
                         panic(ERR_MALLOC_FAIL);
                 }
+                label_defs_ptr = label_defs + label_defs_pushed;
+        }
 
         *label_defs_ptr++ = (LabelDef){
                 .label_text = label->value.text,
