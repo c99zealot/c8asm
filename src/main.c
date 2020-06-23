@@ -89,6 +89,9 @@ int main(int argc, char **argv) {
                         next_char();
                 } else if (isalpha(current_char) || current_char == '_')
                         *tkn_stream_ptr++ = lex_name();
+                else if (current_char == ';')
+                        while (!(current_char == '\n' || current_char == EOF))
+                                next_char();
                 else
                         next_char();
         }
