@@ -2,3 +2,5 @@ test.s
 test.rb
 perf.data
 out.ch8
+hello_world.s
+c8asm

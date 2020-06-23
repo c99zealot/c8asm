@@ -242,6 +242,7 @@ Token lex_int(void) {
                 }
         } else {
                 // parse decimal
+                next_char();
                 integer_value = decimal_value;
                 while (!(isspace(current_char) || current_char == EOF))
                         if (ISDEC(current_char)) {
