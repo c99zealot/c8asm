@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
 
         if (!fread(infile_buffer, 1, infile_len, infile)) {
                 fprintf(stderr, FMT_ERRMSG("failed to load source file `%s`\n"), infile_name);
-                panic(ERR_MALLOC_FAIL);
+                panic(ERR_FREAD_FAIL);
         }
         fclose(infile);
         infile = NULL;
