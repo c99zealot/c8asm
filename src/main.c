@@ -80,8 +80,6 @@ int main(int argc, char **argv) {
         while (current_char != EOF) {
                 if (ISDEC(current_char))
                         *tkn_stream_ptr++ = lex_int();
-                else if (isalpha(current_char) || current_char == '_')
-                        *tkn_stream_ptr++ = lex_name();
                 else if (current_char == SYM_COMMA || current_char == NAME_I) {
                         *tkn_stream_ptr++ = (Token){
                                 .line = line_count,
@@ -89,7 +87,9 @@ int main(int argc, char **argv) {
                                 .type = current_char
                         };
                         next_char();
-                } else if (current_char == ';')
+                } else if (isalpha(current_char) || current_char == '_')
+                        *tkn_stream_ptr++ = lex_name();
+                else if (current_char == ';')
                         while (!(current_char == '\n' || current_char == EOF))
                                 next_char();
                 else

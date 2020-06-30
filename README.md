@@ -2,7 +2,6 @@
 ![code size shield](https://img.shields.io/github/languages/code-size/c99zealot/c8asm?style=plastic)
 ![top language shield](https://img.shields.io/github/languages/top/c99zealot/c8asm?label=C&style=plastic)
 ![license shield](https://img.shields.io/github/license/c99zealot/c8asm?style=plastic)
-![goto counter shield](https://img.shields.io/github/search/c99zealot/c8asm/goto?style=plastic)
 
 # Usage
 `./c8asm <c8asm source file> <output file name>` (if no name is supplied for the output file then "out.ch8" is used)
@@ -71,15 +70,15 @@ Constants are used to supply operands to mnemonics and c8asm supports four forma
         </tr>
         <tr>
                 <td style="border:1px solid black">hexadecimal</td>
-                <td style="border:1px solid black">0x&lthexadecimal number&gt</td>
+                <td style="border:1px solid black">0(x|X)&lthexadecimal number&gt</td>
         </tr>
         <tr>
                 <td style="border:1px solid black">binary</td>
-                <td style="border:1px solid black">0b&ltbinary number&gt</td>
+                <td style="border:1px solid black">0(b|B)&ltbinary number&gt</td>
         </tr>
         <tr>
                 <td style="border:1px solid black">octal</td>
-                <td style="border:1px solid black">0o&ltoctal number&gt</td>
+                <td style="border:1px solid black">0(o|O)&ltoctal number&gt</td>
         </tr>
 </table>
 
@@ -112,5 +111,55 @@ some_proc:
         ret
 ```
 
-# Mnemonics and their expected operands
-further sections to be added
+# Usage of mnemonics
+- cls (clear screen)
+        `cls`
+- jmp  (jump to address)
+        `jmp (<label>|<constant>)`
+- vjmp (jump to address + v0)
+        `vjmp (<label>|<constant>)`
+- call (call subroutine at address)
+        `call (<label>|<constant>)`
+- ret  (return from subroutine)
+        `ret`
+- sne  (skip next instruction if operands are not equal)
+        `sne <register>, (<register>|<constant>)`
+- se   (skip next instruction if operands are equal)
+        `se <register>, (<register>|<constant>)`
+- mov  (load value into memory location)
+        `mov (<register>|stimer|dtimer), (<register>)`
+        `mov (<register>|I), (<constant>)`
+- or   (bitwise or)
+        `or <register>, <register>`
+- and  (bitwise and)
+        `and <register>, <register>`
+- xor  (bitwise xor)
+        `xor <register>, <register>`
+- add  (addition)
+        `add (<register>|I), <register>`
+- sub  (subtraction)
+        `sub <register>, (<register>|<constant>)`
+- subn (subtraction, set carry flag)
+        `subn <register>, (<register>|<constant>)`
+- shr  (bitwise right shift)
+        `shr <register>, <constant>`
+- shl  (bitwise left shift)
+        `shl <register>, <constant>`
+- rnd  (RNG)
+        `rnd <register>, <constant>`
+- drw  (draw sprite)
+        `drw <register>, <register>, <constant>`
+- wkp  (wait for keypress)
+        `wkp <register>`
+- skd  (skip next instruction if key down)
+        `skd <register>`
+- sku  (skip next instruction if key up)
+        `sku <register>`
+- ldf  (load font location)
+        `lfd <register>`
+- bcd  (binary coded decimal)
+        `bcd <register>`
+- lod  (load into registers)
+        `lod <register>`
+- str  (store in memory)
+        `str <register>`
