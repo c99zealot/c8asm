@@ -127,7 +127,7 @@ some_proc:
 - se   (skip next instruction if operands are equal)<br>
         `se <register>, (<register>|<constant>)`
 - mov  (load value into memory location)<br>
-        `mov (<register>|stimer|dtimer), (<register>)`
+        `mov (<register>|stimer|dtimer), (<register>)`<br>
         `mov (<register>|I), (<constant>)`
 - or   (bitwise or)<br>
         `or <register>, <register>`
