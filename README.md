@@ -3,13 +3,13 @@
 ![top language shield](https://img.shields.io/github/languages/top/c99zealot/c8asm?label=C&style=plastic)
 ![license shield](https://img.shields.io/github/license/c99zealot/c8asm?style=plastic)
 
-# Usage
+## Usage
 `./c8asm <c8asm source file> <output file name>` (if no name is supplied for the output file then "out.ch8" is used)
 
-# Language documentation
+## Language documentation
 `the following assumes the reader is familiar with the CHIP8 architecture`
 
-# Names
+### Names
 C8asm has 60 reserved names, these consist of..
 
 25 mnemonics:
@@ -56,7 +56,7 @@ V0 V1 V2 V3 V4 V5 V6 V7 V8 V9 VA VB VC VD VE VF
 
 These are referred to as "names" in error messages.
 
-# Constants
+### Constants
 Constants are used to supply operands to mnemonics and c8asm supports four formats for integer constants:
 
 <table style="width:100%;border:1px solid black">
@@ -82,7 +82,7 @@ Constants are used to supply operands to mnemonics and c8asm supports four forma
         </tr>
 </table>
 
-# Labels
+### Labels
 Labels are supported as an abstraction over addresses and can be used as operands to instructions jmp, vjmp and call.
 To define a label a name which is not a reserved keyword is written before a colon (:) and to reference a label it's
 name is written with no leading or trailing characters.
@@ -111,7 +111,7 @@ some_proc:
         ret
 ```
 
-# Usage of mnemonics
+### Usage of mnemonics
 - cls (clear screen)<br>
         `cls`
 - jmp  (jump to address)<br>
