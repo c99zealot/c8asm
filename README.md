@@ -112,54 +112,54 @@ some_proc:
 ```
 
 # Usage of mnemonics
-- cls (clear screen)
+- cls (clear screen)<br>
         `cls`
-- jmp  (jump to address)
+- jmp  (jump to address)<br>
         `jmp (<label>|<constant>)`
-- vjmp (jump to address + v0)
+- vjmp (jump to address + v0)<br>
         `vjmp (<label>|<constant>)`
-- call (call subroutine at address)
+- call (call subroutine at address)<br>
         `call (<label>|<constant>)`
-- ret  (return from subroutine)
+- ret  (return from subroutine)<br>
         `ret`
-- sne  (skip next instruction if operands are not equal)
+- sne  (skip next instruction if operands are not equal)<br>
         `sne <register>, (<register>|<constant>)`
-- se   (skip next instruction if operands are equal)
+- se   (skip next instruction if operands are equal)<br>
         `se <register>, (<register>|<constant>)`
-- mov  (load value into memory location)
+- mov  (load value into memory location)<br>
         `mov (<register>|stimer|dtimer), (<register>)`
         `mov (<register>|I), (<constant>)`
-- or   (bitwise or)
+- or   (bitwise or)<br>
         `or <register>, <register>`
-- and  (bitwise and)
+- and  (bitwise and)<br>
         `and <register>, <register>`
-- xor  (bitwise xor)
+- xor  (bitwise xor)<br>
         `xor <register>, <register>`
-- add  (addition)
+- add  (addition)<br>
         `add (<register>|I), <register>`
-- sub  (subtraction)
+- sub  (subtraction)<br>
         `sub <register>, (<register>|<constant>)`
-- subn (subtraction, set carry flag)
+- subn (subtraction, set carry flag)<br>
         `subn <register>, (<register>|<constant>)`
-- shr  (bitwise right shift)
+- shr  (bitwise right shift)<br>
         `shr <register>, <constant>`
-- shl  (bitwise left shift)
+- shl  (bitwise left shift)<br>
         `shl <register>, <constant>`
-- rnd  (RNG)
+- rnd  (RNG)<br>
         `rnd <register>, <constant>`
-- drw  (draw sprite)
+- drw  (draw sprite)<br>
         `drw <register>, <register>, <constant>`
-- wkp  (wait for keypress)
+- wkp  (wait for keypress)<br>
         `wkp <register>`
-- skd  (skip next instruction if key down)
+- skd  (skip next instruction if key down)<br>
         `skd <register>`
-- sku  (skip next instruction if key up)
+- sku  (skip next instruction if key up)<br>
         `sku <register>`
-- ldf  (load font location)
+- ldf  (load font location)<br>
         `lfd <register>`
-- bcd  (binary coded decimal)
+- bcd  (binary coded decimal)<br>
         `bcd <register>`
-- lod  (load into registers)
+- lod  (load into registers)<br>
         `lod <register>`
-- str  (store in memory)
+- str  (store in memory)<br>
         `str <register>`
