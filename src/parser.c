@@ -14,7 +14,7 @@
 
 #define INT_TOO_LARGE_255   "integer constant is too large for this instruction (>255)"
 #define INT_TOO_LARGE_15    "integer constant is too large for this instruction (>15)"
-#define ADDR_LT_512_WARNING "most CHIP8 implementations use addresses below 0x200 for sprite" \
+#define ADDR_LT_512_WARNING "most CHIP8 implementations use addresses below 0x200 for sprite " \
                             "storage, jumping to any of them probably isn't a good idea"
 
 // used throughout to access a byte in the output stream, this makes writes endian-agnostic
