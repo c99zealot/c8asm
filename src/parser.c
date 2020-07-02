@@ -17,6 +17,8 @@
 #define ADDR_LT_512_WARNING "most CHIP8 implementations use addresses below 0x200 for sprite " \
                             "storage, jumping to any of them probably isn't a good idea"
 
+enum {C8_INSTR_SIZE = 2, C8_CODE_START_ADDR = 0x200};
+
 // used throughout to access a byte in the output stream, this makes writes endian-agnostic
 uint8_t *byte_ptr;
 
@@ -61,7 +63,7 @@ static inline void push_label_def(Token *label) {
 
         *label_defs_ptr++ = (LabelDef){
                 .label_text = label->value.text,
-                .c8_addr = (outfile_buffer_ptr - outfile_buffer) * 2 + 0x200,
+                .c8_addr = C8_CODE_START_ADDR + ((outfile_buffer_ptr - outfile_buffer) * C8_INSTR_SIZE),
                 .line = label->line,
                 .col = label->col
         };

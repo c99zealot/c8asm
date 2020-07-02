@@ -78,22 +78,23 @@ int main(int argc, char **argv) {
         // start lexing
         next_char();
         while (current_char != EOF) {
-                if (ISDEC(current_char))
+                if (ISDEC(current_char)) {
                         *tkn_stream_ptr++ = lex_int();
-                else if (current_char == SYM_COMMA || current_char == NAME_I) {
+                } else if (current_char == SYM_COMMA || current_char == NAME_I) {
                         *tkn_stream_ptr++ = (Token){
                                 .line = line_count,
                                 .col = col_count,
                                 .type = current_char
                         };
                         next_char();
-                } else if (isalpha(current_char) || current_char == '_')
+                } else if (isalpha(current_char) || current_char == '_') {
                         *tkn_stream_ptr++ = lex_name();
-                else if (current_char == ';')
+                } else if (current_char == ';') {
                         while (!(current_char == '\n' || current_char == EOF))
                                 next_char();
-                else
+                } else {
                         next_char();
+                }
         }
         (tkn_stream_ptr++)->type = STREAM_END; // finish lexing
 

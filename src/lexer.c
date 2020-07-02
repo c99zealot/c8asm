@@ -46,7 +46,7 @@ static const char *keywords[] = {
 // next_char - sets current_char to and returns the next char from the character stream, sets line_count and col_count
 //
 int next_char(void) {
-        if (infile_buffer_ptr - infile_buffer == infile_len)
+        if (infile_buffer_ptr - infile_buffer >= infile_len)
                 return (current_char = EOF);
 
         current_char = *infile_buffer_ptr++;
@@ -119,7 +119,8 @@ Token lex_name(void) {
         }
 
         // no colon so not a label definition, search for name in keywords list
-        for (i = 0; i < NAME_REG && strcmp(name, keywords[i]); ++i);
+        for (i = 0; i < NAME_REG && strcmp(name, keywords[i]); ++i)
+                ;
 
         // if i == NAME_REG then name was not found in keywords list, assume it's label reference
         if (i == NAME_REG)
