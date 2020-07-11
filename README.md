@@ -3,6 +3,9 @@
 ![top language shield](https://img.shields.io/github/languages/top/c99zealot/c8asm?label=C&style=plastic)
 ![license shield](https://img.shields.io/github/license/c99zealot/c8asm?style=plastic)
 
+## Installation
+Run `make && sudo make install` in the root directory of the project
+
 ## Usage
 `./c8asm <c8asm source file> <output file name>` (if no name is supplied for the output file then "out.ch8" is used)
 
