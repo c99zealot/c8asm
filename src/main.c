@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -132,14 +133,14 @@ int main(int argc, char **argv) {
 
         // resolve label references
         uint8_t *instr_ptr;
-        _Bool found_ref;
+        bool found_ref;
 
         label_refs_len = label_refs_ptr - label_refs;
         for (int i = 0; i < label_refs_len; ++i) {
-                found_ref = 0;
+                found_ref = false;
                 for (int j = 0; j < label_defs_len; ++j)
                         if (!strcmp(label_refs[i].label_text, label_defs[j].label_text)) {
-                                found_ref = 1;
+                                found_ref = true;
 
                                 instr_ptr = (uint8_t*)label_refs[i].output_pos;
 
